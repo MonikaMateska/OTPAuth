@@ -113,8 +113,9 @@ class SecondActivity : AppCompatActivity() {
             sharedPreferencesEditor.putString(STORED_ACCOUNTS, storedAccountsString)
             sharedPreferencesEditor.apply()
             Toast.makeText(this, "Account stored successfully!", Toast.LENGTH_SHORT).show()
-            navigateToFirstActivity()
         }
+
+        navigateToFirstActivity()
     }
 
     private fun readStoredAccounts(): Accounts? {
@@ -136,11 +137,6 @@ class SecondActivity : AppCompatActivity() {
         CAMERA_REQUEST_CODE)
     }
 
-    private fun navigateToFirstActivity() {
-        val switchActivityIntent = Intent(this,  MainActivity::class.java)
-        startActivity(switchActivityIntent)
-    }
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -150,12 +146,17 @@ class SecondActivity : AppCompatActivity() {
             CAMERA_REQUEST_CODE -> {
                 if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(this, "Please grant camera permission in order to scan QR code!", Toast.LENGTH_SHORT).show()
+                    navigateToFirstActivity()
                 } else {
                     Log.e("Main", "Camera permission granted")
                 }
             }
-
         }
+    }
+
+    private fun navigateToFirstActivity() {
+        val switchActivityIntent = Intent(this,  MainActivity::class.java)
+        startActivity(switchActivityIntent)
     }
 
     // maybe delete

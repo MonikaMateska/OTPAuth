@@ -1,7 +1,9 @@
 package com.example.otpauth.activity.mainActivity
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,8 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.otpauth.R
 import com.example.otpauth.activity.secondActivity.SecondActivity
+import com.example.otpauth.model.Accounts
+import com.google.gson.Gson
 
 
 /**
@@ -17,11 +21,17 @@ import com.example.otpauth.activity.secondActivity.SecondActivity
  */
 class FirstFragment : Fragment() {
 
+  private lateinit var sharedPreferences: SharedPreferences
+  protected lateinit var gson: Gson
+
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
     // Inflate the layout for this fragment
+    sharedPreferences = (activity as MainActivity).sharedPreferences
+    gson = (activity as MainActivity).gson
+
     return inflater.inflate(R.layout.fragment_first, container, false)
   }
 
@@ -34,5 +44,9 @@ class FirstFragment : Fragment() {
 //      (activity as Activity?)!!.overridePendingTransition(0, 0)
 //    }
   }
+  private fun readAccounts() {
+    var storedAccountsJson =  sharedPreferences.getString(STORED_ACCOUNTS, "{ accounts: [] }")
+    var storedAccounts = gson.fromJson(storedAccountsJson, Accounts::class.java).accounts
 
+  }
 }

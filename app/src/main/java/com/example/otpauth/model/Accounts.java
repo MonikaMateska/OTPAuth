@@ -5,5 +5,4 @@ import java.util.List;
 
 public class Accounts implements Serializable {
     public List<Account> accounts;
-
 }
