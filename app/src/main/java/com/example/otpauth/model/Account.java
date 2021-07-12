@@ -3,10 +3,24 @@ package com.example.otpauth.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+import kotlin.jvm.JvmField;
+
 public class Account implements Serializable {
     final String secretKey;
     final String issuer;
     final String username;
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public String getIssuer() {
+        return issuer;
+    }
+
+    public String getUsername() {
+        return username;
+    }
 
     public Account(String issuer, String secretKey, String username) {
         this.secretKey = secretKey;
@@ -28,4 +42,6 @@ public class Account implements Serializable {
     public int hashCode() {
         return Objects.hash(secretKey, issuer, username);
     }
+
+
 }

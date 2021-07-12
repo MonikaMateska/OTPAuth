@@ -19,8 +19,8 @@ const val STORED_ACCOUNTS = "storedAccounts"
 
 class MainActivity : AppCompatActivity() {
 
-  private lateinit var sharedPreferences: SharedPreferences
-  private lateinit var gson: Gson
+  public lateinit var sharedPreferences: SharedPreferences
+  public lateinit var gson: Gson
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
       val switchActivityIntent = Intent(this, SecondActivity::class.java)
       startActivity(switchActivityIntent)
     }
-
+    Log.e("Main Activity", "Main activity created!")
     sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
     gson = Gson()
     readAccounts()
