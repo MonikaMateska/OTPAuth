@@ -19,8 +19,8 @@ const val STORED_ACCOUNTS = "storedAccounts"
 
 class MainActivity : AppCompatActivity() {
 
-   lateinit var sharedPreferences: SharedPreferences
-   lateinit var gson: Gson
+  public lateinit var sharedPreferences: SharedPreferences
+  public lateinit var gson: Gson
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -31,9 +31,10 @@ class MainActivity : AppCompatActivity() {
       val switchActivityIntent = Intent(this, SecondActivity::class.java)
       startActivity(switchActivityIntent)
     }
-
+    Log.e("Main Activity", "Main activity created!")
     sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
     gson = Gson()
+    readAccounts()
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -51,5 +52,10 @@ class MainActivity : AppCompatActivity() {
       R.id.action_settings -> true
       else -> super.onOptionsItemSelected(item)
     }
+  }
+
+  private fun readAccounts() {
+    var storedAccountsJson = sharedPreferences.getString(STORED_ACCOUNTS, "{ accounts: [] }")
+    var storedAccounts = gson.fromJson(storedAccountsJson, Accounts::class.java).accounts
   }
 }
