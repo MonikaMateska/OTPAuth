@@ -155,8 +155,7 @@ class SecondActivity : AppCompatActivity() {
     }
 
     private fun navigateToFirstActivity() {
-        val switchActivityIntent = Intent(this,  MainActivity::class.java)
-        startActivity(switchActivityIntent)
+        finish()
     }
 
     // maybe delete

@@ -19,6 +19,7 @@ import android.widget.*
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.constraintlayout.widget.Group
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
     var loginMessage  = findViewById<TextView>(R.id.loginMessage)
     var loginButton  = findViewById<Button>(R.id.loginBtn)
-    var accountsView = findViewById<LinearLayout>(R.id.accountsView)
+    var accountsView = findViewById<CoordinatorLayout>(R.id.accountsView)
     var loginView = findViewById<LinearLayout>(R.id.loginView)
 
     setSupportActionBar(findViewById(R.id.toolbar))
@@ -141,7 +142,6 @@ class MainActivity : AppCompatActivity() {
 
     )
   }
-
 
   private fun readAccounts() {
     var storedAccountsJson = sharedPreferences.getString(STORED_ACCOUNTS, "{ accounts: [] }")
