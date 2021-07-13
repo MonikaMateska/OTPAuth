@@ -40,7 +40,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.ViewHold
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView issuer, code;
+        private TextView issuer, username, code;
         private View view;
 
         public ViewHolder(@NonNull View itemView) {
@@ -48,10 +48,12 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.ViewHold
             view = itemView;
             issuer = (TextView) itemView.findViewById(R.id.issuer);
             code = (TextView) itemView.findViewById(R.id.secretCode);
+            username = (TextView) itemView.findViewById(R.id.username);
         }
 
         public void bindData(Account data){
-            issuer.setText(data.getUsername() + "@" + data.getIssuer());
+            issuer.setText(data.getIssuer());
+            username.setText(data.getUsername());
             code.setText("!@# #@!");
         }
     }

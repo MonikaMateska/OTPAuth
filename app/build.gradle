@@ -45,9 +45,12 @@ dependencies {
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
   implementation 'com.google.code.gson:gson:2.8.5'
 
+  implementation 'androidx.biometric:biometric:1.0.1'
+
   implementation 'com.budiyev.android:code-scanner:2.1.0'
   implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.1"))
   implementation("com.squareup.okhttp3:okhttp")
   implementation("com.squareup.okhttp3:logging-interceptor")
   implementation "org.jetbrains.kotlin:kotlin-script-runtime:1.4.10"
+
 }
