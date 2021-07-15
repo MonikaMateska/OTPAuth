@@ -47,6 +47,7 @@ dependencies {
 
   implementation 'androidx.biometric:biometric:1.0.1'
 
+  implementation("dev.turingcomplete:kotlin-onetimepassword:2.1.0")
   implementation 'com.budiyev.android:code-scanner:2.1.0'
   implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.1"))
   implementation("com.squareup.okhttp3:okhttp")

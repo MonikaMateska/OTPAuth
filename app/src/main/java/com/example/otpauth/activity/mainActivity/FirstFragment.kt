@@ -19,7 +19,11 @@ import com.example.otpauth.model.Account
 import com.example.otpauth.model.Accounts
 import com.example.otpauth.utils.FakeApi
 import com.google.gson.Gson
+import dev.turingcomplete.kotlinonetimepassword.HmacAlgorithm
+import dev.turingcomplete.kotlinonetimepassword.TimeBasedOneTimePasswordConfig
+import dev.turingcomplete.kotlinonetimepassword.TimeBasedOneTimePasswordGenerator
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -29,7 +33,10 @@ class FirstFragment : Fragment() {
 
   private lateinit var sharedPreferences: SharedPreferences
   private lateinit var gson: Gson
-  private lateinit var storedAccounts: List<Accounts>
+  private lateinit var storedAccounts: MutableList<Account>
+  private lateinit var otpConfig: TimeBasedOneTimePasswordConfig
+  private lateinit var recyclerView: RecyclerView
+  private lateinit var accountAdapter: AccountAdapter
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +47,17 @@ class FirstFragment : Fragment() {
 
     sharedPreferences = (activity as MainActivity).sharedPreferences
     gson = (activity as MainActivity).gson
+    otpConfig = TimeBasedOneTimePasswordConfig(codeDigits = 6,
+      hmacAlgorithm = HmacAlgorithm.SHA1,
+      timeStep = 30,
+      timeStepUnit = TimeUnit.SECONDS)
+    storedAccounts = readAccounts()
+
+    Timer().schedule(object: TimerTask() {
+      override fun run() {
+        generateOTP()
+      }
+    }, 0, 15000)
 
     return inflater.inflate(R.layout.fragment_first, container, false)
   }
@@ -47,9 +65,9 @@ class FirstFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    var recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
+    recyclerView = view.findViewById(R.id.recyclerView)
 
-    var accountAdapter: AccountAdapter = AccountAdapter(FakeApi.getInstance().accounts)
+    accountAdapter = AccountAdapter(storedAccounts)
 
     // Uncomment this line for real data and comment the above one
     // ! It is not tested
@@ -63,9 +81,25 @@ class FirstFragment : Fragment() {
 
   }
 
-  private fun readAccounts() : List<Account> {
+  private fun generateOTP() {
+    for (index in storedAccounts.indices) {
+      var account = storedAccounts[index]
+      val accountOTP = TimeBasedOneTimePasswordGenerator(account.secretKey.toByteArray(), otpConfig)
+      account.setOTP(accountOTP.generate(Date()))
+      storedAccounts[index] = account
+    }
+
+    Thread(Runnable {
+      this.activity?.runOnUiThread(java.lang.Runnable {
+        Log.e("OTP", "OTP updated")
+        accountAdapter.notifyDataSetChanged()
+      })
+    }).start()
+  }
+
+  private fun readAccounts() : MutableList<Account> {
     var storedAccountsJson = sharedPreferences.getString(STORED_ACCOUNTS, "{ accounts: [] }")
-    var storedAccounts = gson.fromJson(storedAccountsJson, Accounts::class.java).accounts.toList()
+    var storedAccounts = gson.fromJson(storedAccountsJson, Accounts::class.java).accounts.toMutableList()
     return storedAccounts
   }
 

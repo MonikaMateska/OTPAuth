@@ -9,6 +9,7 @@ public class Account implements Serializable {
     final String secretKey;
     final String issuer;
     final String username;
+    String otp;
 
     public String getSecretKey() {
         return secretKey;
@@ -21,6 +22,10 @@ public class Account implements Serializable {
     public String getUsername() {
         return username;
     }
+
+    public void setOTP(String otp) { this.otp = otp; }
+
+    public String getOtp() { return otp; }
 
     public Account(String issuer, String secretKey, String username) {
         this.secretKey = secretKey;

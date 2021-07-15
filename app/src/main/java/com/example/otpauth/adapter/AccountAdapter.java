@@ -54,7 +54,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.ViewHold
         public void bindData(Account data){
             issuer.setText(data.getIssuer());
             username.setText(data.getUsername());
-            code.setText("!@# #@!");
+            code.setText(data.getOtp());
         }
     }
 
