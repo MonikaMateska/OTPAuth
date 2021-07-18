@@ -67,11 +67,12 @@ class FirstFragment : Fragment() {
 
     recyclerView = view.findViewById(R.id.recyclerView)
 
-    accountAdapter = AccountAdapter(storedAccounts)
+    // Commented for development process only.
+//    accountAdapter = AccountAdapter(storedAccounts)
 
-    // Uncomment this line for real data and comment the above one
-    // ! It is not tested
-    // var accountAdapter: AccountAdapter = AccountAdapter(readAccounts())
+    // Added for development process only.
+
+     accountAdapter = AccountAdapter(FakeApi.getInstance().accounts)
 
     recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL ,false)
 

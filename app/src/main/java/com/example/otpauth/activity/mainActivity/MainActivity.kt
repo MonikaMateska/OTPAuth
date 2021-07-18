@@ -45,7 +45,12 @@ class MainActivity : AppCompatActivity() {
     setupBiometricLogin(context = this)
     setupQRCodeButton()
 
-    accountsView.visibility = View.GONE
+    // Commented for development process only.
+//    accountsView.visibility = View.GONE
+    // Added for development process only.
+    loginView.visibility = View.GONE
+    accountsView.visibility = View.VISIBLE
+
     Log.e("Main Activity", "Main activity created!")
     sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
     gson = Gson()
