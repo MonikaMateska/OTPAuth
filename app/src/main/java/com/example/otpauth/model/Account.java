@@ -27,7 +27,7 @@ public class Account implements Serializable {
 
     public String getOtp() { return otp; }
 
-    public Account(String issuer, String secretKey, String username) {
+    public Account(String username, String issuer, String secretKey) {
         this.secretKey = secretKey;
         this.issuer = issuer;
         this.username = username;

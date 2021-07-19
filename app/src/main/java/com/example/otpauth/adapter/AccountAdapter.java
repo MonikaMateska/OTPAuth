@@ -1,30 +1,45 @@
 package com.example.otpauth.adapter;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.otpauth.R;
 import com.example.otpauth.model.Account;
+import com.example.otpauth.model.Accounts;
+import com.google.gson.Gson;
 
 import java.util.List;
 
-public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.ViewHolder>{
+import static com.example.otpauth.activity.mainActivity.MainActivityKt.STORED_ACCOUNTS;
 
+public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.ViewHolder> {
     private List<Account> accountList;
+    SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor sharedPreferencesEditor;
+    private Gson gson;
 
-    public AccountAdapter(List<Account> accountList) {
+    public AccountAdapter(List<Account> accountList,
+                          SharedPreferences sharedPreferences) {
         this.accountList = accountList;
+        this.sharedPreferences = sharedPreferences;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row, null, false);
+        sharedPreferencesEditor = sharedPreferences.edit();
+        gson = new Gson();
+
         return new ViewHolder(view);
     }
 
@@ -38,10 +53,11 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.ViewHold
         return accountList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
 
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView issuer, username, code;
         private View view;
+        private ImageView imgViewRemoveItem;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -49,6 +65,8 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.ViewHold
             issuer = (TextView) itemView.findViewById(R.id.issuer);
             code = (TextView) itemView.findViewById(R.id.secretCode);
             username = (TextView) itemView.findViewById(R.id.username);
+            imgViewRemoveItem = (ImageView) itemView.findViewById(R.id.imgViewRemoveItem);
+            imgViewRemoveItem.setOnClickListener(this);
         }
 
         public void bindData(Account data){
@@ -56,6 +74,30 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.ViewHold
             username.setText(data.getUsername());
             code.setText(data.getOtp());
         }
+
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(v.getContext(), "Account deleted!", Toast.LENGTH_SHORT).show();
+            removeAt(getAdapterPosition());
+        }
+    }
+
+    public void removeAt(int position) {
+        Accounts storedAccounts = readStoredAccounts();
+        storedAccounts.accounts.remove(position);
+        String storedAccountsString = gson.toJson(storedAccounts);
+        sharedPreferencesEditor.putString(STORED_ACCOUNTS, storedAccountsString);
+        sharedPreferencesEditor.apply();
+
+        accountList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, accountList.size());
+    }
+
+    private Accounts readStoredAccounts() {
+        String storedAccountsString = sharedPreferences.getString(STORED_ACCOUNTS, "{ accounts: [] }");
+        Accounts storedAccounts = gson.fromJson(storedAccountsString, Accounts.class);
+        return storedAccounts;
     }
 
 }

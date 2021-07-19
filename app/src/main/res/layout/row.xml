@@ -38,12 +38,12 @@
 
     <TextView
         android:id="@+id/username"
-        android:layout_width="405dp"
-        android:layout_height="20dp"
+        android:layout_width="328dp"
+        android:layout_height="26dp"
         android:layout_marginTop="4dp"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imgViewRemoveItem"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/issuer" />
@@ -56,4 +56,15 @@
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/secretCode" />
+
+    <ImageView
+        android:id="@+id/imgViewRemoveItem"
+        android:layout_width="32dp"
+        android:layout_height="33dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/secretCode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/issuer"
+        app:layout_constraintVertical_bias="0.555"
+        app:srcCompat="@android:drawable/ic_menu_delete" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,12 +13,12 @@ public class FakeApi {
     private FakeApi(){}
 
     public static FakeApi getInstance(){
-        if(instance == null){
+        if(instance == null) {
             instance = new FakeApi();
-            instance.accounts.add(new Account("Google", "12312312", "risto-trajanov"));
-            instance.accounts.add(new Account("Shopify", "312312312", "monika-mateska"));
-            instance.accounts.add(new Account("YouTube", "531523541235", "bill-gates"));
-            instance.accounts.add(new Account("CexIO", "5123451234", "elon-mask"));
+            instance.accounts.add(new Account("risto-trajanov", "Microsoft", "TMH2LQFHNC33DKAV6XBCRFWVDQBRJ3MD"));
+            instance.accounts.add(new Account("monika-mateska", "Shopify", "ed63dgmjbpepbsob3fxv4hccf3ofy3gh"));
+//            instance.accounts.add(new Account("YouTube", "531523541235", "bill-gates"));
+//            instance.accounts.add(new Account("CexIO", "5123451234", "elon-mask"));
         }
 
         return instance;

@@ -48,8 +48,17 @@ class SecondActivity : AppCompatActivity() {
         codeScanner()
     }
 
-    private fun codeScanner() {
+    override fun onResume() {
+        super.onResume()
+        codeScanner.startPreview()
+    }
 
+    override fun onPause() {
+        codeScanner.releaseResources()
+        super.onPause()
+    }
+
+    private fun codeScanner() {
         codeScanner = CodeScanner(this, scanner_view)
         codeScanner.apply {
             camera = CodeScanner.CAMERA_BACK
@@ -89,16 +98,6 @@ class SecondActivity : AppCompatActivity() {
         scanner_view.setOnClickListener {
             codeScanner.startPreview()
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        codeScanner.startPreview()
-    }
-
-    override fun onPause() {
-        codeScanner.releaseResources()
-        super.onPause()
     }
 
     private fun saveScannedAccount(account: Account) {
@@ -156,24 +155,6 @@ class SecondActivity : AppCompatActivity() {
 
     private fun navigateToFirstActivity() {
         finish()
-    }
-
-    // maybe delete
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
 }
