@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,7 +7,7 @@
 
     <TextView
         android:id="@+id/issuer"
-        android:layout_width="500dp"
+        android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-medium"
@@ -25,7 +24,7 @@
 
     <TextView
         android:id="@+id/secretCode"
-        android:layout_width="315dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginBottom="5dp"
         android:text="TextView"
@@ -38,7 +37,7 @@
 
     <TextView
         android:id="@+id/username"
-        android:layout_width="328dp"
+        android:layout_width="wrap_content"
         android:layout_height="26dp"
         android:layout_marginTop="4dp"
         android:text="TextView"
@@ -61,10 +60,38 @@
         android:id="@+id/imgViewRemoveItem"
         android:layout_width="32dp"
         android:layout_height="33dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/secretCode"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/issuer"
-        app:layout_constraintVertical_bias="0.555"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/issuer"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.253"
         app:srcCompat="@android:drawable/ic_menu_delete" />
+
+    <ProgressBar
+        android:id="@+id/progress_countdown"
+        style="@style/CircularDeterminateProgressBar"
+        android:layout_width="116dp"
+        android:layout_height="109dp"
+        app:layout_constraintBottom_toTopOf="@+id/divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.668"
+        app:layout_constraintStart_toEndOf="@+id/secretCode"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:progress="100" />
+
+    <TextView
+        android:id="@+id/textView_countdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.623"
+        app:layout_constraintStart_toEndOf="@+id/secretCode"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.528" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

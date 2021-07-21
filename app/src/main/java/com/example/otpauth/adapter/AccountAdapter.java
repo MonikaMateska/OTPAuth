@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,8 @@ import com.example.otpauth.model.Accounts;
 import com.google.gson.Gson;
 
 import java.util.List;
+
+import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 import static com.example.otpauth.activity.mainActivity.MainActivityKt.STORED_ACCOUNTS;
 
@@ -55,7 +58,8 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.ViewHold
 
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView issuer, username, code;
+        private TextView issuer, username, code, timer;
+        private ProgressBar timerBar;
         private View view;
         private ImageView imgViewRemoveItem;
 
@@ -66,6 +70,10 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.ViewHold
             code = (TextView) itemView.findViewById(R.id.secretCode);
             username = (TextView) itemView.findViewById(R.id.username);
             imgViewRemoveItem = (ImageView) itemView.findViewById(R.id.imgViewRemoveItem);
+            timer = (TextView) itemView.findViewById(R.id.textView_countdown);
+            timerBar = (ProgressBar) itemView.findViewById(R.id.progress_countdown);
+            timerBar.setMax(15);
+            timerBar.setProgress(15);
             imgViewRemoveItem.setOnClickListener(this);
         }
 
@@ -73,6 +81,8 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.ViewHold
             issuer.setText(data.getIssuer());
             username.setText(data.getUsername());
             code.setText(data.getOtp());
+            timer.setText(String.valueOf(data.getTimer()));
+            timerBar.setProgress(data.getTimer());
         }
 
         @Override

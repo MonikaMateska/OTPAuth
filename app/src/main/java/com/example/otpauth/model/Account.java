@@ -9,7 +9,16 @@ public class Account implements Serializable {
     final String secretKey;
     final String issuer;
     final String username;
+    int timer;
     String otp;
+
+    public int getTimer() {
+        return timer;
+    }
+
+    public void setTimer(int timer) {
+        this.timer = timer;
+    }
 
     public String getSecretKey() {
         return secretKey;
@@ -31,6 +40,7 @@ public class Account implements Serializable {
         this.secretKey = secretKey;
         this.issuer = issuer;
         this.username = username;
+        this.timer = 15;
     }
 
     @Override
