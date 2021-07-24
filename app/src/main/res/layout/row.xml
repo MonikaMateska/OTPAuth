@@ -64,22 +64,22 @@
         app:layout_constraintBottom_toBottomOf="@+id/secretCode"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/issuer"
+        app:layout_constraintStart_toEndOf="@+id/progress_countdown"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.253"
+        app:layout_constraintVertical_bias="0.516"
         app:srcCompat="@android:drawable/ic_menu_delete" />
 
     <ProgressBar
         android:id="@+id/progress_countdown"
         style="@style/CircularDeterminateProgressBar"
-        android:layout_width="116dp"
-        android:layout_height="109dp"
+        android:layout_width="66dp"
+        android:layout_height="70dp"
         app:layout_constraintBottom_toTopOf="@+id/divider"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.668"
+        app:layout_constraintHorizontal_bias="0.725"
         app:layout_constraintStart_toEndOf="@+id/secretCode"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.394"
         tools:progress="100" />
 
     <TextView
@@ -87,11 +87,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/divider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.623"
-        app:layout_constraintStart_toEndOf="@+id/secretCode"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.528" />
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/progress_countdown"
+        app:layout_constraintEnd_toEndOf="@+id/progress_countdown"
+        app:layout_constraintStart_toStartOf="@+id/progress_countdown"
+        app:layout_constraintTop_toTopOf="@+id/progress_countdown" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

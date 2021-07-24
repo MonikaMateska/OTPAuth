@@ -46,6 +46,9 @@ dependencies {
   implementation 'com.google.code.gson:gson:2.8.5'
 
   implementation 'androidx.biometric:biometric:1.0.1'
+  implementation 'me.zhanghai.android.materialprogressbar:library:1.6.1'
+  implementation "org.apache.commons:commons-lang3:3.4"
+  implementation 'commons-codec:commons-codec:1.10'
 
   implementation("dev.turingcomplete:kotlin-onetimepassword:2.1.0")
   implementation 'com.budiyev.android:code-scanner:2.1.0'

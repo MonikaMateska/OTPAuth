@@ -29,8 +29,8 @@ const val STORED_ACCOUNTS = "storedAccounts"
 
 class MainActivity : AppCompatActivity() {
 
-  public lateinit var sharedPreferences: SharedPreferences
-  public lateinit var gson: Gson
+  lateinit var sharedPreferences: SharedPreferences
+  lateinit var gson: Gson
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -46,15 +46,14 @@ class MainActivity : AppCompatActivity() {
     setupQRCodeButton()
 
     // Commented for development process only.
-//    accountsView.visibility = View.GONE
+    accountsView.visibility = View.GONE
     // Added for development process only.
-    loginView.visibility = View.GONE
-    accountsView.visibility = View.VISIBLE
+//    loginView.visibility = View.GONE
+//    accountsView.visibility = View.VISIBLE
 
     Log.e("Main Activity", "Main activity created!")
     sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
     gson = Gson()
-    readAccounts()
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -65,7 +64,7 @@ class MainActivity : AppCompatActivity() {
   }
 
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    return when (item.itemId) {
+    return when (item.itemId)  {
       R.id.action_settings -> true
       else -> super.onOptionsItemSelected(item)
     }
@@ -99,7 +98,6 @@ class MainActivity : AppCompatActivity() {
       BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {
         loginMessage.setText("Your device does not have any fingerprint saved, please check your security settings")
         loginBtn.visibility = View.GONE
-
       }
     }
 
@@ -143,10 +141,5 @@ class MainActivity : AppCompatActivity() {
     }
 
     )
-  }
-
-  private fun readAccounts() {
-    var storedAccountsJson = sharedPreferences.getString(STORED_ACCOUNTS, "{ accounts: [] }")
-    var storedAccounts = gson.fromJson(storedAccountsJson, Accounts::class.java).accounts
   }
 }

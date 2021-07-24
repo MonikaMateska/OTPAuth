@@ -20,8 +20,6 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
-import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
-
 import static com.example.otpauth.activity.mainActivity.MainActivityKt.STORED_ACCOUNTS;
 
 public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.ViewHolder> {
@@ -72,8 +70,8 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.ViewHold
             imgViewRemoveItem = (ImageView) itemView.findViewById(R.id.imgViewRemoveItem);
             timer = (TextView) itemView.findViewById(R.id.textView_countdown);
             timerBar = (ProgressBar) itemView.findViewById(R.id.progress_countdown);
-            timerBar.setMax(15);
-            timerBar.setProgress(15);
+            timerBar.setMax(30);
+            timerBar.setProgress(30);
             imgViewRemoveItem.setOnClickListener(this);
         }
 
